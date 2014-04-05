@@ -30,7 +30,7 @@ app.get('/', function(req, res) {
 			twiRequestSecret = requestTokenSecret;
 			response = "Request Token obtained: " + twiRequestToken + " : " + twiRequestSecret;
 			console.log(response);
-			res.redirect("https://twitter.com/oauth/authenticate?oauth_token=twiRequestToken");
+			res.redirect("https://twitter.com/oauth/authenticate?oauth_token=" + twiRequestToken);
 			res.send(response);
 		}
 	});
