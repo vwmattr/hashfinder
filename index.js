@@ -63,8 +63,9 @@ app.get('/twi-auth', function(req, res) {
 									console.log(data["screen_name"]);
 								}
 								res.send("Hello " + data["screen_name"]);
-							}
-						});
+							});
+						}
+					});
 				} else {
 					res.send("Couldn't help ya, request token mismatch: mine: " + twiRequestToken + " yours: " + req.query.oauth_token);
 				}
