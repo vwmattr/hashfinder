@@ -30,18 +30,50 @@ app.get('/', function(req, res) {
 			twiRequestSecret = requestTokenSecret;
 			response = "Request Token obtained: " + twiRequestToken + " : " + twiRequestSecret;
 			console.log(response);
+			res.redirect("https://twitter.com/oauth/authenticate?oauth_token=twiRequestToken");
 			res.send(response);
 		}
 	});
-	
-	
+
+
 });
 
 app.get('/twi-auth', function(req, res) {
-	console.log("!~@~@~@~@~@~@~@! /twi-auth say moo !~@~@~@~@~@~@~@!");
-});
+		console.log("!~@~@~@~@~@~@~@! TWI-AUTH SAY MOO !~@~@~@~@~@~@~@!");
 
-var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
-	console.log("Listening on " + port);
-});
+
+
+		if (twiRequestToken == req.query.oauth_token) {
+			twitter.getAccessToken(twiRequestToken, twiRequestSecret, req.query.oauth_verifier,
+				function(error, accessToken, accessTokenSecret, results) {
+					if (error) {
+						console.log(error);
+					} else {
+						//store accessToken and accessTokenSecret somewhere (associated to the user)
+						//Step 4: Verify Credentials belongs here
+						twitter.verifyCredentials(accessToken, accessTokenSecret,
+							function(error, data, response) {
+								if (error) {
+									//something was wrong with either accessToken or accessTokenSecret
+									//start over with Step 1
+								} else {
+									//accessToken and accessTokenSecret can now be used to make api-calls (not yet implemented)
+									//data contains the user-data described in the official Twitter-API-docs
+									//you could e.g. display his screen_name
+									console.log(data["screen_name"]);
+								}
+								res.send("Hello " + data["screen_name"]);
+							}
+						});
+				} else {
+					res.send("Couldn't help ya, request token mismatch: mine: " + twiRequestToken + " yours: " + req.query.oauth_token);
+				}
+
+
+
+			});
+
+		var port = Number(process.env.PORT || 5000);
+		app.listen(port, function() {
+			console.log("Listening on " + port);
+		});
