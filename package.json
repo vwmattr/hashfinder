@@ -1,0 +1,11 @@
+{
+  "name": "hashfinder",
+  "version": "0.0.0",
+  "description": "find latest tweets for a given hashtag in real time.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}
