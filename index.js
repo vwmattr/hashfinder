@@ -4,7 +4,12 @@ var util = require("util");
 var logfmt = require("logfmt");
 var app = express();
 
-var creds = require("./mycreds");
+var creds = {
+	consumer_key: 'add consumer key here',
+	consumer_secret: 'add consumer secret here',
+	access_token: 'add access token here',
+	access_token_secret: 'add access token secret here'
+}
 
 var twitter = require('twit');
 var twit = new twitter({
