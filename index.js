@@ -59,26 +59,13 @@ app.get('/twi-auth', function(req, res) {
 								//you could e.g. display his screen_name
 								console.log(data["screen_name"]);
 							}
-
-							twitter.search("tweets", {q: "googleio"}, accessToken, accessTokenSecret,
-								function(error, data, response) {
-									if (error) {
-										var errorString = util.inspect(error, false, null);
-										console.log("Error getting OAuth request token : " + errorString);
-										res.send(errorString);
-									} else {
-										res.send(util.inspect(data, false, null));
-									}
-								});
-							// res.send("Hello " + data["screen_name"]);
+							res.send("Hello " + data["screen_name"]);
 						});
 				}
 			});
 	} else {
 		res.send("Couldn't help ya, request token mismatch: mine: " + twiRequestToken + " yours: " + req.query.oauth_token);
 	}
-
-
 
 });
 
