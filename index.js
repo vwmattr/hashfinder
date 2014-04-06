@@ -60,9 +60,7 @@ app.get('/twi-auth', function(req, res) {
 								console.log(data["screen_name"]);
 							}
 
-							twitter.search("tweets", {
-									"q": "googleio"
-								}, accessToken, accessTokenSecret,
+							twitter.search("tweets", {q: "googleio"}, accessToken, accessTokenSecret,
 								function(error, data, response) {
 									if (error) {
 										var errorString = util.inspect(error, false, null);
